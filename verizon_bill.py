@@ -31,4 +31,7 @@ def main():
   st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
+  
+  st.write("<i>by Joseph Rosas</i>")
+  
 main()
