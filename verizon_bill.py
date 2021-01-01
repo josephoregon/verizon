@@ -17,6 +17,8 @@ def get_data():
 
 def main():
   
+  df = get_data()
+  
   df.groupby('Person').Charge.sum().sort_values()
   
 main()
