@@ -1,12 +1,22 @@
+import numpy as np
 import pandas as pd
+import streamlit as st
 
-df = pd.read_csv('VERIZON_BILL_CSV.csv')
+def get_data():
+  df = pd.read_csv('VERIZON_BILL_CSV.csv')
+  
+  df['Charge'] = df['Charge'].str.replace('\t', '')
+  df['Charge'] = df['Charge'].str.replace('$', '')
+  df['Charge'] = df['Charge'].str.replace('(', '-')
+  df['Charge'] = df['Charge'].str.replace(')', '')
+  
+  df['Charge'] = pd.to_numeric(df['Charge'])
 
-df['Charge'] = df['Charge'].str.replace('\t', '')
-df['Charge'] = df['Charge'].str.replace('$', '')
-df['Charge'] = df['Charge'].str.replace('(', '-')
-df['Charge'] = df['Charge'].str.replace(')', '')
+  return df
 
-df['Charge'] = pd.to_numeric(df['Charge'])
 
-df.groupby('Person').Charge.sum().sort_values()
+def main():
+  
+  df.groupby('Person').Charge.sum().sort_values()
+  
+main()
