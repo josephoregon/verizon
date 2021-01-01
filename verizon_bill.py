@@ -31,6 +31,10 @@ def main():
   
   st.markdown("---")
   
+  st.write(dataset)
+  
+  st.markdown("---")
+  
   st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
   
 main()
