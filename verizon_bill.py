@@ -41,8 +41,8 @@ def main():
   #st.line_chart(df.set_index(col_x)[col_y])
   
   fig = go.Figure(go.Bar(
-              x=df["Person"],
-              y=df["Charges"],
+              x=charge_by_person["Person"],
+              y=charge_by_person["Charges"],
               orientation='h'))
   
   st.plotly_chart(fig, use_container_width=True)
