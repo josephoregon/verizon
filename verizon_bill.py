@@ -28,7 +28,7 @@ def main():
   
   df.groupby('Person').Charge.sum().sort_values()
   
-  st.title("**♟**Explore E-com dashboard**♟**")
+  st.title("**🤑**Eckhardt Family Verizon Dashboard**🤑**")
   st.write("Here, you can see the demo of a simple web-app dashboard."
   "It will show you general information such as your sales and revenue for a specific "
   "ecom-platform on which you sell your products.")
