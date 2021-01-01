@@ -31,7 +31,9 @@ def main():
   
   st.markdown("---")
   
-  st.write(dataset)
+  # view total charges by person
+  charge_by_person = df.groupby('Person').Charge.sum().sort_values()
+  st.write(charge_by_person)
   
   st.markdown("---")
   
