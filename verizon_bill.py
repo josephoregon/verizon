@@ -24,6 +24,6 @@ def main():
   
   df.groupby('Person').Charge.sum().sort_values()
   
-  st.bar_chart(df)
+  st.bar_chart(df, x)
   
 main()
