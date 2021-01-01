@@ -31,6 +31,15 @@ def main():
   st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
+  <details>
+  <summary>Data Dictionary</summary>
+
+  ## Data Dictionary
+
+  - Variable 1: this is variable 1
+  - Variable 2: this is variable 2
+
+  </details>
   
   st.write("<i>by Joseph Rosas</i>")
   
