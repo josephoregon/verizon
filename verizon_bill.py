@@ -39,7 +39,13 @@ def main():
   #visual_df = charge_by_person.copy()
   #visual_df['Charges'] = visual_df['Charges'].map("\${:,.2f}".format)
   #st.line_chart(df.set_index(col_x)[col_y])
-  st.bar_chart(charge_by_person.set_index("Person")["Charges"])
+  
+  fig = go.Figure(go.Bar(
+              x=df["Person"],
+              y=df["Charges"],
+              orientation='h'))
+  
+  st.plotly_chart(fig, use_container_width=True)
   
   st.markdown("---")
   
