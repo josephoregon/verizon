@@ -31,6 +31,15 @@ def main():
   
   st.markdown("---")
   
+  cols = {
+    "Person": "User's Name",
+    "Device": "Phone Device Used",
+    "Charge": "Charge Amount Reflected",
+    "Description": "Reason",
+    "Type": "Category",
+    "Start Date": "Charge Starting Date",
+    "End Date": "Charge Ending Date"}
+  
   column = st.selectbox("Describe Column", list(dataset.columns), format_func=cols.get)
 
   st.write(dataset[column].describe())
