@@ -24,15 +24,15 @@ def get_data():
 
 def main():
   
-  df = get_data()
-  
-  df.groupby('Person').Charge.sum().sort_values()
+  dataset = get_data()
   
   st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
   st.markdown("---")
   
-  st.markdown("<i>by Joseph Rosas</i>")
+  column = st.selectbox("Describe Column", list(dataset.columns), format_func=cols.get)
+
+  st.write(dataset[column].describe())
   
 main()
