@@ -29,6 +29,6 @@ def main():
   df.groupby('Person').Charge.sum().sort_values()
   
   st.title("Eckhardt Verizon Dashboard**📱**")
-  st.write("Breakdown of the Verizon Bill.")
+  st.write("Breakdown of the Verizon billing for everyone to see!")
   
 main()
