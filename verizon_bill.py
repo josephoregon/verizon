@@ -24,7 +24,7 @@ def get_data():
 
 def main():
   
-  dataset = get_data()
+  df = get_data()
   
   st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
