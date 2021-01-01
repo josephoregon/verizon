@@ -31,6 +31,6 @@ def main():
   
   st.markdown("---")
   
-  st.markdown('<i by Joseph Rosas</i>', unsafe_allow_html=True)
+  st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
   
 main()
