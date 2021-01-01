@@ -2,7 +2,11 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-import altair as alt
+from plotly import tools
+import plotly.offline as py
+import plotly.express as px
+import plotly.graph_objects as go
+
 
 def get_data():
   
@@ -24,6 +28,9 @@ def main():
   
   df.groupby('Person').Charge.sum().sort_values()
   
-  st.bar_chart(df, x)
+  st.title("**♟**Explore E-com dashboard**♟**")
+  st.write("Here, you can see the demo of a simple web-app dashboard."
+  "It will show you general information such as your sales and revenue for a specific "
+  "ecom-platform on which you sell your products.")
   
 main()
