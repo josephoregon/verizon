@@ -38,8 +38,8 @@ def main():
   
   #visual_df = charge_by_person.copy()
   #visual_df['Charges'] = visual_df['Charges'].map("\${:,.2f}".format)
-
-  st.bar_chart(charge_by_person["Person"])
+  #st.line_chart(df.set_index(col_x)[col_y])
+  st.bar_chart(charge_by_person.set_index("Person")["Charges"])
   
   st.markdown("---")
   
