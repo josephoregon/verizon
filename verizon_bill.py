@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
+@st.cache
 def get_data():
   
   df = pd.read_csv('VERIZON_BILL_CSV.csv')
@@ -34,10 +35,11 @@ def main():
   # view total charges by person
   charge_by_person = df.groupby('Person').Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename('Charges').reset_index()
-  visual_df = charge_by_person.copy()
-  visual_df['Charges'] = visual_df['Charges'].map("\${:,.2f}".format)
+  
+  #visual_df = charge_by_person.copy()
+  #visual_df['Charges'] = visual_df['Charges'].map("\${:,.2f}".format)
 
-  st.write(visual_df)
+  st.bar_chart(charge_by_person[‘Person’])
   
   st.markdown("---")
   
