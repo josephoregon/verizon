@@ -23,26 +23,24 @@ def get_data():
   return df
 
 def charges_by_person(df):
-  
-  # Charges by person graph
+  """Display table that shows total charge for each individual"""
   
   charge_by_person = df.groupby('Person').Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename('Charges').reset_index()
-
+  
   df = df[df["Person"] != "General Charges"]
-
+  
   charge_by_person = df.groupby("Person").Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename("Charge").reset_index()
   charge_by_person['Charge'] = round(charge_by_person['Charge'], 2)
 
-  visul_df = charge_by_person.copy()
-  visul_df['Charge'] = visul_df['Charge'].map("${:,.2f}".format)
+  charge_by_person['Charge'] = charge_by_person['Charge'].map("${:,.2f}".format)
 
   fig = go.Figure(data=[go.Table(
-      header=dict(values=list(visul_df.columns),
+      header=dict(values=list(charge_by_person.columns),
                   fill_color='light blue',
                   align='center'),
-      cells=dict(values=[visul_df.Person, visul_df.Charge],
+      cells=dict(values=[charge_by_person.Person, charge_by_person.Charge],
                  fill_color='light gray',
                  align='center'))
   ])
