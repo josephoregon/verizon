@@ -29,7 +29,7 @@ def main():
   
   
   st.markdown('<div align="center">Eckhardt Verizon Dashboard**📱**</div>')
-  st.title()
+  st.title("Hi")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
   st.markdown("---")
