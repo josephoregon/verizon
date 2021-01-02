@@ -22,24 +22,12 @@ def get_data():
 
   return df
 
-
-def main():
+def charges_by_person():
   
-  df = get_data()
+  # Charges by person graph
   
-  st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon📱</h1>", unsafe_allow_html=True)
-  st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing for everyone to see!</h3>", unsafe_allow_html=True)
-  
-  st.markdown("---")
-  
-  # view total charges by person
   charge_by_person = df.groupby('Person').Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename('Charges').reset_index()
-  
-  
-  # view total charges by person
-
-  # view total charges by person
 
   df = df[df["Person"] != "General Charges"]
 
@@ -58,12 +46,24 @@ def main():
                  fill_color='light gray',
                  align='center'))
   ])
+  
   fig.update_layout(width=600, height=400)
   
-  st.plotly_chart(fig, use_container_width=True)
+  return st.plotly_chart(fig, use_container_width=True)
+
+
+def main():
+  
+  df = get_data()
+  
+  st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon📱</h1>", unsafe_allow_html=True)
+  st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing for everyone to see!</h3>", unsafe_allow_html=True)
   
   st.markdown("---")
   
+  charges_by_person()
+  
+  st.markdown("---")
   st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
   
 main()
