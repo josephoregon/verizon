@@ -21,35 +21,11 @@ def get_data():
     df['Charge Amount'] = df['Charge Amount'].str.replace(')', '')
 
     df['Charge Amount'] = pd.to_numeric(df['Charge Amount'])
+    
+    df['Charge Amount'] = round(df['Charge Amount'], 2)
 
     return df
 
-
-def charges_by_person(df):
-    """Display table that shows total charge for each individual"""
-
-    charge_by_person = df.groupby('Person')['Charge Amount'].sum().sort_values()
-    charge_by_person = charge_by_person.rename('Charges').reset_index()
-
-    df = df[df['Person'] != 'General Charges']
-
-    charge_by_person = df.groupby('Person')['Charge Amount'].sum().sort_values()
-    charge_by_person = charge_by_person.rename('Charge Amount').reset_index()
-    charge_by_person['Charge Amount'] = round(charge_by_person['Charge Amount'], 2)
-
-    charge_by_person['Charge Amount'] = charge_by_person['Charge Amount'
-            ].map('${:,.2f}'.format)
-
-    fig = \
-        go.Figure(data=[go.Table(header=dict(values=list(charge_by_person.columns),
-                  fill_color='light blue', align='center'),
-                  cells=dict(values=[charge_by_person.Person,
-                  charge_by_person['Charge Amount']], fill_color='light gray',
-                  align='center'))])
-
-    fig.update_layout(width=600, height=400)
-    
-    return st.plotly_chart(fig, use_container_width=True)
 
 def main():
     
@@ -60,15 +36,10 @@ def main():
     
     df = get_data()
     
-    df['Charge Amount'] = round(df['Charge Amount'], 2)
-    
     group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-    graph_list = st.sidebar.multiselect('Group By', group_by_list)
+    graph_list = st.sidebar.multiselect('Group By', group_by_listm key='Person')
 
     st.markdown('---')
-
-    charges_by_person(df)
-    
     
     grouped_df = df.groupby(graph_list)['Charge Amount'].sum().sort_values()
     grouped_df = grouped_df.rename('Charge Amount').reset_index()
