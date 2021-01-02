@@ -22,7 +22,7 @@ def get_data():
 
   return df
 
-def charges_by_person():
+def charges_by_person(df):
   
   # Charges by person graph
   
@@ -61,7 +61,7 @@ def main():
   
   st.markdown("---")
   
-  charges_by_person()
+  charges_by_person(df)
   
   st.markdown("---")
   st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
