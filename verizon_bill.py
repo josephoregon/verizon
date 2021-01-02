@@ -43,11 +43,11 @@ def main():
     grouped_df = df.groupby(graph_list)['Charge Amount'].sum().sort_values()
     grouped_df = grouped_df.rename('Charge Amount').reset_index()
     grouped_df['Charge Amount'] = grouped_df['Charge Amount'].map('${:,.2f}'.format)
-    
+   
     
     fig = go.Figure(data=[go.Table(header=dict(values=list(grouped_df.columns),
                           fill_color='light blue', align='center'),
-                          cells=dict(values=graph_list[graph_list], fill_color='light gray',
+                          cells=dict(values=graph_list[0], fill_color='light gray',
                           align='center'))])
 
     fig.update_layout(width=600, height=400)
