@@ -55,11 +55,6 @@ def charges_by_person(df):
 def main():
 
     df = get_data()
-    
-    group_by_list = list(df.columns)
-    graph_list = st.sidebar.multiselect('Group By', group_by_list)
-    grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
-    st.write(grouped_df)
 
     st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
                 , unsafe_allow_html=True)
@@ -67,8 +62,13 @@ def main():
                 , unsafe_allow_html=True)
 
     st.markdown('---')
-
+    
     charges_by_person(df)
+    
+    group_by_list = list(df.columns)
+    graph_list = st.sidebar.multiselect('Group By', group_by_list)
+    grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
+    st.write(grouped_df)
 
     st.markdown('---')
     st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
