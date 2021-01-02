@@ -55,7 +55,7 @@ def main():
     
     df = get_data()
     
-    group_by_list = list(df.columns)
+    group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
     graph_list = st.sidebar.multiselect('Group By', group_by_list)
 
     st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
