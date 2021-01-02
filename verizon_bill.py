@@ -33,10 +33,10 @@ def main():
     st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing for everyone to see!</h3>"
                 , unsafe_allow_html=True)
     
-    df = get_data()
-    
     group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
     graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
+    
+    df = get_data()
 
     st.markdown('---')
     
