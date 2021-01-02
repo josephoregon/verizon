@@ -26,7 +26,9 @@ def get_data():
 
     return df
 
-
+group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
+graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
+    
 def main():
     
     st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
@@ -35,9 +37,6 @@ def main():
                 , unsafe_allow_html=True)
     
     df = get_data()
-    
-    group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-    graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
 
     st.markdown('---')
     
