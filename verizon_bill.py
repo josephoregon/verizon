@@ -58,8 +58,8 @@ def main():
     
     group_by_list = list(df.columns)
     graph_list = st.sidebar.multiselect('Group By', group_by_list)
-    df.groupby(graph_list)['Charge Amount'].sum()
-    st.write(df)
+    grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
+    st.write(grouped_df)
 
     st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
                 , unsafe_allow_html=True)
