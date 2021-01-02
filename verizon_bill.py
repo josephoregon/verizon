@@ -44,15 +44,15 @@ def main():
     grouped_df = grouped_df.rename('Charge Amount').reset_index()
     grouped_df['Charge Amount'] = grouped_df['Charge Amount'].map('${:,.2f}'.format)
    
-    
-    fig = go.Figure(data=[go.Table(header=dict(values=list(grouped_df.columns),
-                          fill_color='light blue', align='center'),
-                          cells=dict(values=graph_list[0], fill_color='light gray',
-                          align='center'))])
+    st.write(grouped_df)
+    #fig = go.Figure(data=[go.Table(header=dict(values=list(grouped_df.columns),
+    #                      fill_color='light blue', align='center'),
+    #                      cells=dict(values=graph_list[0], fill_color='light gray',
+    #                      align='center'))])
 
-    fig.update_layout(width=600, height=400)
+    #fig.update_layout(width=600, height=400)
     
-    st.plotly_chart(fig, use_container_width=True)
+    #st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('---')
     st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
