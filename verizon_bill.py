@@ -28,12 +28,12 @@ def get_data():
 def charges_by_person(df):
     """Display table that shows total charge for each individual"""
 
-    charge_by_person = df.groupby('Person').Charge.sum().sort_values()
+    charge_by_person = df.groupby('Person').['Charge Amount'].sum().sort_values()
     charge_by_person = charge_by_person.rename('Charges').reset_index()
 
     df = df[df['Person'] != 'General Charges']
 
-    charge_by_person = df.groupby('Person').Charge.sum().sort_values()
+    charge_by_person = df.groupby('Person').['Charge Amount'].sum().sort_values()
     charge_by_person = charge_by_person.rename('Charge Amount').reset_index()
     charge_by_person['Charge Amount'] = round(charge_by_person['Charge Amount'], 2)
 
