@@ -27,7 +27,9 @@ def main():
   
   df = get_data()
   
-  st.title("Eckhardt Verizon Dashboard**📱**")
+  
+  st.markdown('<div align="center">Eckhardt Verizon Dashboard**📱**</div>')
+  st.title()
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
   st.markdown("---")
