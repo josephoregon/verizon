@@ -44,7 +44,7 @@ def charges_by_person(df):
         go.Figure(data=[go.Table(header=dict(values=list(charge_by_person.columns),
                   fill_color='light blue', align='center'),
                   cells=dict(values=[charge_by_person.Person,
-                  charge_by_person.Charge], fill_color='light gray',
+                  charge_by_person['Charge Amount']], fill_color='light gray',
                   align='center'))])
 
     fig.update_layout(width=600, height=400)
