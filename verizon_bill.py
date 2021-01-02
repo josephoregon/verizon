@@ -51,8 +51,10 @@ def charges_by_person(df):
     
     return st.plotly_chart(fig, use_container_width=True)
 
-
 def main():
+    
+    group_by_list = list(df.columns)
+    graph_list = st.sidebar.multiselect('Group By', group_by_list)
 
     df = get_data()
 
@@ -65,8 +67,7 @@ def main():
     
     charges_by_person(df)
     
-    group_by_list = list(df.columns)
-    graph_list = st.sidebar.multiselect('Group By', group_by_list)
+   
     grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
     st.write(grouped_df)
 
