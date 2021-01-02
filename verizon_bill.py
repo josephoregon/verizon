@@ -42,7 +42,7 @@ def main():
   df = df[df["Person"] != "General Charges"]
   charge_by_person = df.groupby("Person").Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename("Charge").reset_index()
-  fig = px.bar(charge_by_person, y='Person', x='Charge', text='Charge', orientation='h' )
+  fig = px.bar(charge_by_person, y='Person', x='Charge', text='Charge', orientation='h', width=1000)
   fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
   fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
   
