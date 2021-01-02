@@ -36,14 +36,15 @@ def main():
   charge_by_person = df.groupby('Person').Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename('Charges').reset_index()
   
-  #visual_df = charge_by_person.copy()
-  #visual_df['Charges'] = visual_df['Charges'].map("\${:,.2f}".format)
-  #st.line_chart(df.set_index(col_x)[col_y])
   
-  fig = go.Figure(go.Bar(
-              x=charge_by_person["Charges"],
-              y=charge_by_person["Person"],
-              orientation='h'))
+  # view total charges by person
+
+  df = df[df["Person"] != "General Charges"]
+  charge_by_person = df.groupby("Person").Charge.sum().sort_values()
+  charge_by_person = charge_by_person.rename("Charge").reset_index()
+  fig = px.bar(charge_by_person, y='Person', x='Charge', text='Charge', orientation='h' )
+  fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+  fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
   
   st.plotly_chart(fig, use_container_width=True)
   
