@@ -53,23 +53,38 @@ def charges_by_person(df):
 
 def main():
     
-    df = get_data()
-    
-    group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-    graph_list = st.sidebar.multiselect('Group By', group_by_list)
-
     st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
                 , unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing for everyone to see!</h3>"
                 , unsafe_allow_html=True)
+    
+    df = get_data()
+    
+    df['Charge Amount'] = round(df['Charge Amount'], 2)
+    
+    group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
+    graph_list = st.sidebar.multiselect('Group By', group_by_list)
 
     st.markdown('---')
 
     charges_by_person(df)
 
-
+    
     grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
-    st.write(grouped_df)
+    
+    grouped_df['Charge Amount'] = grouped_df['Charge Amount'].map('${:,.2f}'.format)
+    
+    
+    fig = \
+        go.Figure(data=[go.Table(header=dict(values=list(grouped_df.columns),
+                  fill_color='light blue', align='center'),
+                  cells=dict(values=[grouped_df.Person,
+                  grouped_df['Charge Amount']], fill_color='light gray',
+                  align='center'))])
+
+    fig.update_layout(width=600, height=400)
+    
+    st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('---')
     st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
