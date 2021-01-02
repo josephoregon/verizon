@@ -39,12 +39,26 @@ def main():
   
   # view total charges by person
 
+  # view total charges by person
+
   df = df[df["Person"] != "General Charges"]
+
   charge_by_person = df.groupby("Person").Charge.sum().sort_values()
   charge_by_person = charge_by_person.rename("Charge").reset_index()
-  fig = px.bar(charge_by_person, y='Charge', x='Person', text='Charge')
-  fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
-  fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+  charge_by_person['Charge'] = round(charge_by_person['Charge'], 2)
+
+  visul_df = charge_by_person.copy()
+  visul_df['Charge'] = visul_df['Charge'].map("${:,.2f}".format)
+
+  fig = go.Figure(data=[go.Table(
+      header=dict(values=list(visul_df.columns),
+                  fill_color='light blue',
+                  align='center'),
+      cells=dict(values=[visul_df.Person, visul_df.Charge],
+                 fill_color='light gray',
+                 align='center'))
+  ])
+  fig.update_layout(width=600, height=400)
   
   st.plotly_chart(fig, use_container_width=True)
   
