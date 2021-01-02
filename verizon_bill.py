@@ -28,8 +28,8 @@ def main():
   df = get_data()
   
   
-  st.markdown('<div align="center">Eckhardt Verizon Dashboard**📱**</div>')
-  st.title("Hi")
+  st.markdown('<div align="center">Eckhardt Verizon Dashboard**📱**</div>', unsafe_allow_html=True)
+  st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
   st.markdown("---")
