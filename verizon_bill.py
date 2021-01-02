@@ -37,7 +37,7 @@ def main():
     df = get_data()
     
     group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-    graph_list = st.sidebar.multiselect('Group By', group_by_listm key='Person')
+    graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
 
     st.markdown('---')
     
