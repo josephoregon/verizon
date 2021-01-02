@@ -25,9 +25,6 @@ def get_data():
     df['Charge Amount'] = round(df['Charge Amount'], 2)
 
     return df
-
-group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
     
 def main():
     
@@ -35,6 +32,9 @@ def main():
                 , unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing for everyone to see!</h3>"
                 , unsafe_allow_html=True)
+    
+    group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
+    graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
     
     df = get_data()
 
