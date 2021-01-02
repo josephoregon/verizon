@@ -47,8 +47,7 @@ def main():
     
     fig = go.Figure(data=[go.Table(header=dict(values=list(grouped_df.columns),
                           fill_color='light blue', align='center'),
-                          cells=dict(values=[grouped_df.Person,
-                          grouped_df['Charge Amount']], fill_color='light gray',
+                          cells=dict(values=[grouped_dfgraph_list], fill_color='light gray',
                           align='center'))])
 
     fig.update_layout(width=600, height=400)
