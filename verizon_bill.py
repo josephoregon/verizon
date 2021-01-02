@@ -34,7 +34,7 @@ def main():
                 , unsafe_allow_html=True)
     
     group_by_list = ['Person', 'Device', 'Charge Description', 'Charge Type']
-    graph_list = st.sidebar.multiselect('Group By', group_by_list, key='Person')
+    graph_list = st.sidebar.multiselect('Group By', group_by_list, default='Person')
     
     df = get_data()
 
