@@ -27,8 +27,7 @@ def main():
   
   df = get_data()
   
-  
-  st.markdown('#<div align="center">Eckhardt Verizon📱</div>', unsafe_allow_html=True)
+  st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon📱</h1>", unsafe_allow_html=True)
   st.title("Eckhardt Verizon Dashboard**📱**")
   st.write("Breakdown of the Verizon billing for everyone to see!")
   
