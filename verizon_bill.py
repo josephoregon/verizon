@@ -15,12 +15,12 @@ def get_data():
 
     df = pd.read_csv('VERIZON_BILL_CSV.csv')
 
-    df['Charge'] = df['Charge'].str.replace('\t', '')
-    df['Charge'] = df['Charge'].str.replace('$', '')
-    df['Charge'] = df['Charge'].str.replace('(', '-')
-    df['Charge'] = df['Charge'].str.replace(')', '')
+    df['Charge Amount'] = df['Charge Amount'].str.replace('\t', '')
+    df['Charge Amount'] = df['Charge Amount'].str.replace('$', '')
+    df['Charge Amount'] = df['Charge Amount'].str.replace('(', '-')
+    df['Charge Amount'] = df['Charge Amount'].str.replace(')', '')
 
-    df['Charge'] = pd.to_numeric(df['Charge'])
+    df['Charge Amount'] = pd.to_numeric(df['Charge Amount'])
 
     return df
 
@@ -34,10 +34,10 @@ def charges_by_person(df):
     df = df[df['Person'] != 'General Charges']
 
     charge_by_person = df.groupby('Person').Charge.sum().sort_values()
-    charge_by_person = charge_by_person.rename('Charge').reset_index()
-    charge_by_person['Charge'] = round(charge_by_person['Charge'], 2)
+    charge_by_person = charge_by_person.rename('Charge Amount').reset_index()
+    charge_by_person['Charge Amount'] = round(charge_by_person['Charge Amount'], 2)
 
-    charge_by_person['Charge'] = charge_by_person['Charge'
+    charge_by_person['Charge Amount'] = charge_by_person['Charge Amount'
             ].map('${:,.2f}'.format)
 
     fig = \
