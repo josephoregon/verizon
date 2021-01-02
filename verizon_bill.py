@@ -68,10 +68,10 @@ def main():
     st.markdown('---')
 
     charges_by_person(df)
-
     
-    grouped_df = df.groupby(graph_list)['Charge Amount'].sum()
     
+    grouped_df = df.groupby(graph_list)['Charge Amount'].sum().sort_values()
+    grouped_df = grouped_df.rename('Charge Amount').reset_index()
     grouped_df['Charge Amount'] = grouped_df['Charge Amount'].map('${:,.2f}'.format)
     
     
