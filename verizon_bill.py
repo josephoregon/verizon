@@ -31,7 +31,17 @@ def get_data():
 df = get_data()
 
 def main():
-    st.dataframe(df)
+            
+    charge_by_user = df[df["Person"] != "General Account"]
+
+    charges_per_user = (
+        charge_by_user.groupby("Person")["Charge Amount"]
+        .sum()
+        .sort_values()
+        .reset_index(name="Charge")
+    )
+
+    st.dataframe(charges_per_user)
     
     st.markdown('---')
      
