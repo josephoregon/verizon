@@ -8,14 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly import tools
 
-st.set_page_config(
-            
-            page_title="Ex-stream-ly Cool App",
-            page_icon="🧊",
-            layout="wide",
-            initial_sidebar_state="expanded"
-            
-      )
+
 
 
 
@@ -42,6 +35,13 @@ def get_data():
 df = get_data()
 
 def main():
+            
+    st.set_page_config(
+        page_title="Ex-stream-ly Cool App",
+        page_icon="🧊",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
             
     charge_by_user = df[df["Person"] != "General Account"]
 
