@@ -8,7 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly import tools
 
-st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon\xf0\x9f\x93\xb1</h1>"
+st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon</h1>"
             , unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing.</h3>"
             , unsafe_allow_html=True)
