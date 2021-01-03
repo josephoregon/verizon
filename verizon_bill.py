@@ -8,9 +8,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly import tools
 
-
-
-
+st.set_page_config(
+        page_title="Ex-stream-ly Cool App",
+        page_icon="🧊",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
 
 st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon</h1>"
             , unsafe_allow_html=True)
@@ -35,13 +38,6 @@ def get_data():
 df = get_data()
 
 def main():
-            
-    st.set_page_config(
-        page_title="Ex-stream-ly Cool App",
-        page_icon="🧊",
-        layout="wide",
-        initial_sidebar_state="expanded",
-    )
             
     charge_by_user = df[df["Person"] != "General Account"]
 
