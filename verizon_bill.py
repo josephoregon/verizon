@@ -48,8 +48,6 @@ def main():
         .sort_values()
         .reset_index(name="Charge")
     )
-
-    st.dataframe(charges_per_user)
     
     st.markdown('---')
      
