@@ -10,9 +10,8 @@ from plotly import tools
 
 st.set_page_config(
         page_title="Ex-stream-ly Cool App",
-        page_icon="🧊",
+        page_icon="📱",
         layout="wide",
-        layout='centered',
         initial_sidebar_state="expanded",
     )
 
@@ -21,6 +20,7 @@ st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon</h1>"
 st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing.</h3>"
             , unsafe_allow_html=True)
 
+@st.cache
 def get_data():
     """Clean Incoming Data"""
     # Import
@@ -39,7 +39,7 @@ def get_data():
 df = get_data()
 
 def main():
-            
+
     charge_by_user = df[df["Person"] != "General Account"]
 
     charges_per_user = (
@@ -54,7 +54,7 @@ def main():
     st.markdown('---')
      
     
-    
+
     st.markdown('---')
     
     st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
