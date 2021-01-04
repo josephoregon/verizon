@@ -66,7 +66,7 @@ def main():
                    align='left'))
     ])
 
-    fig.show()
+    st.plotly_chart(fig)
 
     st.markdown('---')
     
