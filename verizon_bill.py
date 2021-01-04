@@ -51,7 +51,7 @@ def main():
     
     st.markdown('---')
      
-    col_list = ['Person', 'Device', 
+    col_list = ['Person', 
                 'Charge Amount', 
                 'Charge Description']
 
@@ -59,7 +59,7 @@ def main():
         header=dict(values=list(col_list),
                     fill_color='dark gray',
                     align='left'),
-        cells=dict(values=[df.Person, df.Device, df['Charge Amount'], df['Charge Description']],
+        cells=dict(values=[df.Person, df['Charge Amount']]],
                    fill_color='light gray',
                    align='left'))
     ])
