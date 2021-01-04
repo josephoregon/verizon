@@ -53,7 +53,20 @@ def main():
     
     st.markdown('---')
      
-    
+    col_list = ['Person', 'Device', 
+                'Charge Amount', 
+                'Charge Description']
+
+    fig = go.Figure(data=[go.Table(
+        header=dict(values=list(col_list),
+                    fill_color='dark gray',
+                    align='left'),
+        cells=dict(values=[df.Person, df.Device, df['Charge Amount'], df['Charge Description']],
+                   fill_color='light gray',
+                   align='left'))
+    ])
+
+    fig.show()
 
     st.markdown('---')
     
