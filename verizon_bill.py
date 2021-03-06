@@ -1,74 +1,105 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# Libraries
 import numpy as np
 import pandas as pd
 import streamlit as st
-import plotly.offline as py
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly import tools
 
-st.set_page_config(
-        page_title="Verizon Bill",
-        page_icon="📱",
-        layout="centered",
-        initial_sidebar_state="expanded"
-    )
+st.header('Verizon Bill Amount')
 
-st.markdown("<h1 style='text-align: center;'>Eckhardt Verizon</h1>"
-            , unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>Breakdown of the Verizon billing.</h3>"
-            , unsafe_allow_html=True)
+def main(name):
+    """ Main Application """
 
-@st.cache
-def get_data():
-    """Clean Incoming Data"""
-    # Import
-    df = pd.read_csv('VERIZON_BILL_CSV.csv')
-    # Remove special characters 
-    df['Charge Amount'] = df['Charge Amount'].str.replace('\t', '')
-    df['Charge Amount'] = df['Charge Amount'].str.replace('$', '')
-    df['Charge Amount'] = df['Charge Amount'].str.replace('(', '-')
-    df['Charge Amount'] = df['Charge Amount'].str.replace(')', '')
-    # Change data type
-    df['Charge Amount'] = pd.to_numeric(df['Charge Amount'])
-    # Round charte amounts to two decimals
-    df['Charge Amount'] = round(df['Charge Amount'], 2)
-    return df
+    actual_amount = 321.81
 
-df = get_data()
+    data = [
 
-def main():
+        ['Joe', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Joe', 'iPhone', 'Debit', 'Tax', 2.82],
+        ['Joe', 'iPhone', 'Debit', 'Tax', 1.35],
 
-    charge_by_user = df[df["Person"] != "General Account"]
+        ['Joe', 'iWatch', 'Debit', 'Base_Plan', 10.00],
+        ['Joe', 'iWatch', 'Debit', 'Tax', 2.48],
+        ['Joe', 'iWatch', 'Debit', 'Tax', 1.14],
 
-    charges_per_user = (
-        charge_by_user.groupby("Person")["Charge Amount"]
-        .sum()
-        .sort_values()
-        .reset_index(name="Charge")
-    )
-    
-    st.markdown('---')
-     
-    col_list = ['Person', 
-                'Charge Amount', 
-                'Charge Description']
+        ['Joe', 'iPad', 'Debit', 'Base_Plan', 10.00],
+        ['Joe', 'iPad', 'Debit', 'Tax', .08],
 
-    fig = go.Figure(data=[go.Table(
-        header=dict(values=list(col_list),
-                    fill_color='dark gray',
-                    align='left'),
-        cells=dict(values=[df.Person, df['Charge Amount']]],
-                   fill_color='light gray',
-                   align='left'))
-    ])
+        ['Debbie', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Debbie', 'iPhone', 'Debit', 'Tax', 2.67],
+        ['Debbie', 'iPhone', 'Debit', 'Tax', 1.26],
 
-    st.plotly_chart(fig)
+        ['Lindsay', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Lindsay', 'iPhone', 'Debit', 'Tax', 2.67],
+        ['Lindsay', 'iPhone', 'Debit', 'Tax', 1.26],
 
-    st.markdown('---')
-    
-    st.markdown('<i class="material-icons">by Joseph Rosas</i>', unsafe_allow_html=True)
-    
-main()
+        ['Tanner', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Tanner', 'iPhone', 'Debit', 'Tax', 2.67],
+        ['Tanner', 'iPhone', 'Debit', 'Tax', 1.26],
 
+        ['Jenny', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Jenny', 'iPhone', 'Debit', 'Tax', 2.67],
+        ['Jenny', 'iPhone', 'Debit', 'Tax', 1.26],
+
+        ['Katie', 'iPhone', 'Debit', 'Base_Plan', 30.00],
+        ['Katie', 'iPhone', 'Debit', 'Tax', 2.67],
+        ['Katie', 'iPhone', 'Debit', 'Tax', 1.26],
+
+        ['Verizon', 'iPhone', 'Debit', 'Distribute', 20.00],
+        ['Verizon', 'iPhone', 'Debit', 'Distribute', 36.66],
+        ['Verizon', 'iPhone', 'Debit', 'Distribute', 36.66],
+        ['Verizon', 'General', 'Debit', 'Distribute', .97],
+        ['Verizon', 'iPhone', 'Credit', 'Distribute', -10.00],
+        ['Verizon', 'iPad', 'Credit', 'Distribute', -10.00],
+        ['Verizon', 'iPhone', 'Credit', 'Distribute', -33.33],
+        ['Verizon', 'iPhone', 'Credit', 'Distribute', -33.33]
+
+    ]
+
+    # Create Initial Dataframe
+    df = pd.DataFrame(data, columns=['person', 'device', 'type', 'description', 'amount'])
+
+    # Filter Base Charges Only
+    base_charges = df[(df['description'] == 'Base_Plan') | (df['description'] == 'Tax')]
+
+    # Overall Total Bill Amount
+    bill_amount = df[df['type'] == 'Debit']['amount'].sum()
+
+    # Actual Bill Against Calculated Bill
+    bill_diff = (actual_amount - bill_amount).round(2)
+
+    # iPhone Upgrade Charges (for those who upgraded)
+
+    share_charges = df[df['person'] == 'Verizon']
+
+    iphone_charge_list = ['Lindsay', 'Jenny', 'Debbie', 'Joe']
+
+    iphone_charge_count = len(iphone_charge_list)
+
+    iphone_share_debits = share_charges[
+        (share_charges['type'] == 'Debit')
+        & (share_charges['device'] == 'iPhone')].reset_index(drop=True)
+
+    debit_to_split = iphone_share_debits.amount.sum()
+    debit_to_split = (debit_to_split / iphone_charge_count)
+
+    st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
+
+    group_df = base_charges.groupby('person')['amount'].sum().to_frame(
+        name='amount').reset_index()
+
+    data = [[iphone_charge_list[3], debit_to_split],
+            [iphone_charge_list[1], debit_to_split],
+            [iphone_charge_list[2], debit_to_split],
+            [iphone_charge_list[0], debit_to_split]]
+
+    dfcharge = pd.DataFrame(data, columns=['person', 'amount'])
+    final_charges_per_person = pd.concat(
+        [group_df, dfcharge],
+        axis=0).groupby('person')['amount'].sum().round(2).to_frame().reset_index()
+
+    final_charges_per_person = final_charges_per_person.sort_values(by='amount', ascending=False)
+
+    st.write(final_charges_per_person)
+
+
+if __name__ == '__main__':
+    main('PyCharm')
