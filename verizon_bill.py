@@ -76,7 +76,7 @@ def main(name):
 
     iphone_share_debits = share_charges[
         (share_charges['type'] == 'Debit')
-        & (share_charges['device'] == 'iPhone')].reset_index(drop=True)
+        & (share_charges['device'] == 'iPhone') | (share_charges['device'] == 'General')].reset_index(drop=True)
 
     debit_to_split = iphone_share_debits.amount.sum()
     debit_to_split = (debit_to_split / iphone_charge_count)
@@ -103,7 +103,7 @@ def main(name):
     st.write(final_charges_per_person)
 
     st.write("Calculated Charge: ${}".format(calculated_charge))
-    st.write("Actual vs Calculated: ${}".format((actual_amount - calculated_charge).round(2)))
+    st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge).round(2)))
 
 
 if __name__ == '__main__':
