@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 
 st.set_page_config(page_title='Family Verizon Bill', layout='centered')
 
@@ -104,7 +105,21 @@ def main(name):
     st.write(final_charges_per_person)
     st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
     
-    import plotly.express as px
+    data = [
+    ['JUN', '2020', 119.10],
+    ['JUL', '2020', 119.59],
+    ['AUG', '2020', 118.47],
+    ['SEP', '2020', 118.47],
+    ['OCT', '2020', 108.36],
+    ['NOV', '2020', 119.22],
+    ['DEC', '2020', 632.47],
+    ['JAN', '2021', 321.81],
+    ['FEB', '2021', 321.81]
+    ]
+
+    historical_charges = pd.DataFrame(data, columns=['MONTH', 'YEAR', 'TOTAL'])
+    
+
     fig = px.line(historical_charges, x="MONTH", y="TOTAL")
 
     annotations = []
