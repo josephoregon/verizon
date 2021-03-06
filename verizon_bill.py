@@ -104,6 +104,36 @@ def main(name):
     st.write(final_charges_per_person)
     st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
     
+    import plotly.express as px
+    fig = px.line(historical_charges, x="MONTH", y="TOTAL")
+
+    annotations = []
+
+    # labeling the left_side of the plot
+    annotations.append(dict(x='DEC', y=632.47,
+                          xanchor='right', yanchor='middle',
+                          text='Family Joins Verizon Plan',
+                          font=dict(family='Arial', size=16),
+                          showarrow=True))
+
+    # labeling the left_side of the plot
+    annotations.append(dict(x='JAN', y=historical_charges['TOTAL'][7],
+                          xanchor='right', yanchor='middle',
+                          text='${}'.format(historical_charges['TOTAL'][7]),
+                          font=dict(family='Arial', size=16),
+                          showarrow=True))
+
+    # labeling the left_side of the plot
+    annotations.append(dict(x='NOV', y=historical_charges['TOTAL'][5],
+                          xanchor='right', yanchor='middle',
+                          text='${}'.format(historical_charges['TOTAL'][5]),
+                          font=dict(family='Arial', size=16),
+                          showarrow=True))
+
+    fig.update_layout(annotations=annotations)
+
+    st.pyplot(fig)
+    
     #st.write("Calculated Charge: ${}".format(calculated_charge))
     #st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
 
