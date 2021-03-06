@@ -97,8 +97,11 @@ def main(name):
         axis=0).groupby('person')['amount'].sum().round(2).to_frame().reset_index()
 
     final_charges_per_person = final_charges_per_person.sort_values(by='amount', ascending=False)
+    
+    calculated_charge = final_charges_per_person['amount'].sum().round(2)
 
-    st.write(final_charges_per_person)
+    st.write("Calculated Charge: ${}".format(calculated_charge))
+    st.write("Actual vs Calculated: #{}".format((actual_amount - calculated_charge).round(2)))
 
 
 if __name__ == '__main__':
