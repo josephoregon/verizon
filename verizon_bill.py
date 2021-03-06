@@ -98,9 +98,9 @@ def main(name):
     
     calculated_charge = final_charges_per_person['amount'].sum()
     
+    st.write(final_charges_per_person)
     st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
     
-    #st.write(final_charges_per_person)
     #st.write("Calculated Charge: ${}".format(calculated_charge))
     #st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
 
