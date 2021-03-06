@@ -78,7 +78,8 @@ def main(name):
 
     iphone_share_debits = share_charges[
         (share_charges['type'] == 'Debit')
-        & (share_charges['device'] == 'iPhone') | (share_charges['device'] == 'General')].reset_index(drop=True)
+        & (share_charges['device'] == 'iPhone') |
+        (share_charges['device'] == 'General')].reset_index(drop=True)
 
     debit_to_split = iphone_share_debits.amount.sum()
     debit_to_split = (debit_to_split / iphone_charge_count)
