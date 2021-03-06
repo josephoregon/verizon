@@ -81,8 +81,6 @@ def main(name):
     debit_to_split = iphone_share_debits.amount.sum()
     debit_to_split = (debit_to_split / iphone_charge_count)
 
-    st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
-
     group_df = base_charges.groupby('person')['amount'].sum().to_frame(
         name='amount').reset_index()
 
@@ -100,10 +98,11 @@ def main(name):
     
     calculated_charge = final_charges_per_person['amount'].sum()
     
-    st.write(final_charges_per_person)
-
-    st.write("Calculated Charge: ${}".format(calculated_charge))
-    st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
+    st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
+    
+    #st.write(final_charges_per_person)
+    #st.write("Calculated Charge: ${}".format(calculated_charge))
+    #st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
 
 
 if __name__ == '__main__':
