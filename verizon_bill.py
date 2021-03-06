@@ -147,7 +147,7 @@ def main(name):
 
     fig.update_layout(annotations=annotations)
 
-    st.pyplot(fig)
+    st.plotly_chart(fig)
     
     #st.write("Calculated Charge: ${}".format(calculated_charge))
     #st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
