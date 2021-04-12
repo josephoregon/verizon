@@ -1,5 +1,3 @@
-# Libraries
-import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -7,6 +5,7 @@ import plotly.express as px
 st.set_page_config(page_title='Family Verizon Bill', layout='centered')
 
 st.header('Verizon Bill Amount')
+
 
 def main(name):
     """ Main Application """
@@ -99,26 +98,25 @@ def main(name):
         axis=0).groupby('person')['amount'].sum().to_frame().reset_index()
 
     final_charges_per_person = final_charges_per_person.sort_values(by='amount', ascending=False)
-    
+
     calculated_charge = final_charges_per_person['amount'].sum()
-    
+
     st.write(final_charges_per_person)
     st.subheader('Total Charge Amount: ${}'.format(bill_amount.round(2)))
-    
+
     data = [
-    ['JUN', '2020', 119.10],
-    ['JUL', '2020', 119.59],
-    ['AUG', '2020', 118.47],
-    ['SEP', '2020', 118.47],
-    ['OCT', '2020', 108.36],
-    ['NOV', '2020', 119.22],
-    ['DEC', '2020', 632.47],
-    ['JAN', '2021', 321.81],
-    ['FEB', '2021', 321.81]
+        ['JUN', '2020', 119.10],
+        ['JUL', '2020', 119.59],
+        ['AUG', '2020', 118.47],
+        ['SEP', '2020', 118.47],
+        ['OCT', '2020', 108.36],
+        ['NOV', '2020', 119.22],
+        ['DEC', '2020', 632.47],
+        ['JAN', '2021', 321.81],
+        ['FEB', '2021', 321.81]
     ]
 
     historical_charges = pd.DataFrame(data, columns=['MONTH', 'YEAR', 'TOTAL'])
-    
 
     fig = px.line(historical_charges, x="MONTH", y="TOTAL")
 
@@ -126,31 +124,31 @@ def main(name):
 
     # labeling the left_side of the plot
     annotations.append(dict(x='DEC', y=632.47,
-                          xanchor='right', yanchor='middle',
-                          text='Family Joins Verizon Plan',
-                          font=dict(family='Arial', size=16),
-                          showarrow=True))
+                            xanchor='right', yanchor='middle',
+                            text='Family Joins Verizon Plan',
+                            font=dict(family='Arial', size=16),
+                            showarrow=True))
 
     # labeling the left_side of the plot
     annotations.append(dict(x='JAN', y=historical_charges['TOTAL'][7],
-                          xanchor='right', yanchor='middle',
-                          text='${}'.format(historical_charges['TOTAL'][7]),
-                          font=dict(family='Arial', size=16),
-                          showarrow=True))
+                            xanchor='right', yanchor='middle',
+                            text='${}'.format(historical_charges['TOTAL'][7]),
+                            font=dict(family='Arial', size=16),
+                            showarrow=True))
 
     # labeling the left_side of the plot
     annotations.append(dict(x='NOV', y=historical_charges['TOTAL'][5],
-                          xanchor='right', yanchor='middle',
-                          text='${}'.format(historical_charges['TOTAL'][5]),
-                          font=dict(family='Arial', size=16),
-                          showarrow=True))
+                            xanchor='right', yanchor='middle',
+                            text='${}'.format(historical_charges['TOTAL'][5]),
+                            font=dict(family='Arial', size=16),
+                            showarrow=True))
 
     fig.update_layout(annotations=annotations)
 
     st.plotly_chart(fig)
-    
-    #st.write("Calculated Charge: ${}".format(calculated_charge))
-    #st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
+
+    # st.write("Calculated Charge: ${}".format(calculated_charge))
+    # st.write("Actual vs Calculated Difference: ${}".format((actual_amount - calculated_charge)))
 
 
 if __name__ == '__main__':
